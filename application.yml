@@ -1,0 +1,58 @@
+server:
+  port: 6777
+  servlet:
+    session:
+      timeout: 168h  # 设置 session 过期时间为7天
+spring:
+  datasource:
+    username: 
+    password: 
+    url: jdbc:mysql://mysql:3306/cool
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    cache: false
+  web:
+    resources:
+      # 指定静态资源路径，classpath中的/static以及文件系统中的upload/，访问资源时会到下面两个目录里找。找到返回 找不到404
+      static-locations: classpath:/static/,file:upload/
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 200MB
+
+aliyun:
+#  支付宝当面付接口
+  alipay:
+    gatewayUrl: https://openapi.alipay.com/gateway.do
+    charset: UTF-8
+    format: json
+    signType: RSA2
+
+#   ip请求限制
+rate-limiter:
+#   通常情况下
+  capacity: 100
+#  突发情况下
+  refill-tokens: 200
+#  间隔
+  refill-duration: 1
+
+
+chatgpt-share:
+  port: 8300
+  
+fuclaude:
+  # fuclaude获取登录链接的地址
+  url: https://claude.pw
+  auth-url: /manage-api/auth/oauth_token
+
+
+ip-auth:
+  auth-url: https://075114.xyz

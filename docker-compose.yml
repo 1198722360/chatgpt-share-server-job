@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  chatgpt-job:
+    image: wxyin/chatgpt-share-server-job:latest # 使用推送的 Docker Hub 镜像
+    environment:
+      TZ: Asia/Shanghai # 指定时区
+    ports:
+      - "6777:6777"
+    volumes:
+      - ./application.yml:/app/application.yml
+      - ./upload:/app/upload
+    restart: always
+    networks:
+      - chatgpt-share_default
+    entrypoint: ["java","-javaagent:/app/chatgpt-job-latest-encrypted.jar","-jar","/app/chatgpt-job-latest-encrypted.jar", "--spring.config.location=/app/application.yml"]
+
+networks:
+  chatgpt-share_default:
+    external: true
+
