@@ -1,6 +1,7 @@
 # chatgpt-share-server-job
 #### 未改主体的可高度自定义的xyhelper旗下的chatgpt-share-server二开。集注册、登录、在线下单、分离plus会员/普通会员、集成claude并获取剩余次数、邀请返利机制、二级分销系统、优惠券发放、激活码发放、公告管理、虚拟车队等实用功能于一体。
 
+#### 预览
 前端地址：[demo.075114.xyz](https://demo.075114.xyz "demo.075114.xyz")
 后台地址：[demo.075114.xyz/myadmin](https://demo.075114.xyz/myadmin "demo.075114.xyz/myadmin")
 
@@ -31,22 +32,4 @@
 
 13.反监管功能：开启后不登录只显示账号列表，隐藏在线商城。上次被阿里云抽查到了，封了域名，要求我整改或备案。我跟客服扯了一晚上保证这保证那才给我解开。后来不知道是不是开启隐藏商店的原因，再也没找过我。🫥如果给查到，可以开启这个功能半个月，等检查的走了，再关闭。
 
-
-#### 预览
-桌面端：
-![](https://raw.githubusercontent.com/1198722360/picture/main/d1csi-snh1z.gif)
-
-移动端：
-![](https://raw.githubusercontent.com/1198722360/picture/main/6c7c137ea31c393f27a5%20-middle-original.gif)
-
-后台：
-![](https://raw.githubusercontent.com/1198722360/picture/main/20240930105732.png)
-![](https://raw.githubusercontent.com/1198722360/picture/main/20240930105911.png)
-![](https://raw.githubusercontent.com/1198722360/picture/main/20240930110042.png)
-![](https://raw.githubusercontent.com/1198722360/picture/main/20240930110131.png)
-![](https://raw.githubusercontent.com/1198722360/picture/main/20240930110226.png)
-![](https://raw.githubusercontent.com/1198722360/picture/main/20240930110517.png)
-![](https://raw.githubusercontent.com/1198722360/picture/main/20240930110555.png)
-![](https://raw.githubusercontent.com/1198722360/picture/main/20240930110624.png)
-![](https://raw.githubusercontent.com/1198722360/picture/main/20240930110814.png)
-![](https://raw.githubusercontent.com/1198722360/picture/main/20240930111218.png)
+#### 部署教程
