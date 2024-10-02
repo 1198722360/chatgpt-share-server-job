@@ -1,0 +1,158 @@
+// 设置一个密码，防止别人调用你的更新次数的接口，在服务器上的application.yml中要与之保持一致
+const password="xxxxxx" 
+
+const shareUrl="https://demo.075114.xyz" // 访问你的share的网址
+
+//部署在huggingface上的fuclaude的访问地址
+const hfUrl="xxsxx-fuclaude.hf.space" 
+
+export default {
+  async fetch(request, env) {
+    const _url = new URL(request.url);
+    const pathname = _url.pathname;
+    
+    const clientIp = request.headers.get('cf-connecting-ip');
+
+    if (pathname.match(/^\/api\/bootstrap\/.*\/statsig$/)) {
+      return handleStatsigRequest(request, _url, clientIp, env);
+    }     
+    else if (pathname.match(/^\/api\/organizations\/.*\/chat_conversations\/.*\/completion$/)) {
+      return handleCompletionRequest(request, _url, clientIp, env);
+    } 
+    else if (pathname === '/logout') {
+      // 拦截 /logout 请求并重定向
+      return Response.redirect(shareUrl+'/list', 302);
+    } else if (pathname === '/login' ) {
+      // 拦截不带参数的 /login 请求并重定向
+      return Response.redirect(shareUrl+'/list', 302);
+    } else {
+      // 其他请求的处理
+      return proxyRequest(request, _url);
+    }
+  }
+};
+
+async function handleStatsigRequest(request, url, clientIp, env) {
+  // 保留原始hostname
+  const originalHostname = url.hostname;
+  url.hostname = hfUrl;
+  const req = new Request(url, request);
+
+  // 发起代理请求
+  const res = await fetch(req);
+  const body = await res.json();
+
+  // 从响应中提取 email 并存储 IP-Email 映射
+  const email = body.user.privateAttributes.email;
+  await saveIpEmailMapping(clientIp, email, env);
+  
+  console.log(`更新 IP-Email 映射: ${clientIp} -> ${email}`);
+  console.log('123');
+  // 返回修改后的响应
+  return new Response(JSON.stringify(body), res);
+}
+
+async function handleCompletionRequest(request, url, clientIp, env) {
+  console.log('Handling completion request');
+  url.hostname = hfUrl;
+  const req = new Request(url, request);
+
+  const res = await fetch(req);
+  
+  if (res.status === 429) {
+    const body = await res.json();
+    const errorMessage = JSON.parse(body.error.message);
+    const { resetsAt, remaining } = errorMessage;
+    if (resetsAt) {
+      const email = await getEmailByIp(clientIp, env);
+      if (email) {
+        await sendToUpdateCarRemainingAPI({ email, resetsAt, remaining });
+        console.log(`Rate limit exceeded: ${clientIp} -> ${email}, resetsAt: ${resetsAt}, remaining: ${remaining}`);
+      }
+    }
+    return new Response(JSON.stringify(body), res);
+  } else {
+    const reader = res.body.getReader();
+    const stream = new ReadableStream({
+      async start(controller) {
+        let firstUpdateDone = false;
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          const textChunk = new TextDecoder("utf-8").decode(value);
+          controller.enqueue(value);
+
+          if (!firstUpdateDone) {
+            const match = textChunk.match(/"resetsAt":(\d+),"remaining":(\d+)/);
+            if (match) {
+              const [_, resetsAt, remaining] = match;
+              const email = await getEmailByIp(clientIp, env);
+              if (email) {
+                await sendToUpdateCarRemainingAPI({ email, resetsAt, remaining });
+                console.log(`Sent update for: ${clientIp} -> ${email}, resetsAt: ${resetsAt}, remaining: ${remaining}`);
+                firstUpdateDone = true; // Ensure we only send the update once
+              }
+            }
+          }
+        }
+        controller.close();
+        reader.releaseLock();
+      }
+    });
+    return new Response(stream, {
+      headers: res.headers
+    });
+  }
+}
+
+
+async function proxyRequest(request, url) {
+  const hostname = url.hostname;
+  url.hostname = hfUrl;
+  const req = new Request(url, request);
+  req.headers.set('origin', 'https://'+hfUrl);
+  
+  const res = await fetch(req);
+  let newres = new Response(res.body, res);
+
+  let location = newres.headers.get('location');
+  if (location !== null && location !== "") {
+    location = location.replace('://'+hfUrl, '://'+hostname);
+    newres.headers.set('location', location);
+  }
+
+  newres.headers.set('Access-Control-Allow-Origin', '*');
+  newres.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  newres.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  
+  return newres;
+}
+
+// 存储 IP-Email 映射的辅助函数
+async function saveIpEmailMapping(ip, email, env) {
+  await env.IP_EMAIL_MAP.put(ip, email);
+}
+
+async function getEmailByIp(ip, env) { 
+  return await env.IP_EMAIL_MAP.get(ip);
+}
+
+async function deleteIpEmailMapping(ip, env) {
+  await env.IP_EMAIL_MAP.delete(ip);
+}
+
+// 更新 Car Remaining 的辅助函数
+async function sendToUpdateCarRemainingAPI(data) {
+  data.password=password;
+  const postData = JSON.stringify(data);
+  const postOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: postData
+  };
+
+  const response = await fetch(shareUrl+'/job/claude/updateCarRemaining', postOptions);
+  console.log(`更新 Car Remaining API 响应状态: ${response.status}`);
+}
