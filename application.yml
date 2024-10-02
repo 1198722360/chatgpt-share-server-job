@@ -53,6 +53,3 @@ fuclaude:
   url: https://www.claude.pw
   auth-url: /manage-api/auth/oauth_token
   password: aaaaa
-
-ip-auth:
-  auth-url: https://075114.xyz
