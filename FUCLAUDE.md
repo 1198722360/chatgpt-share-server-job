@@ -1,4 +1,5 @@
 ##### 1.注册huggingface并登录，并记好你的用户名。
+
 ##### 2.来到我的huggingface space，并复制我的space：[https://huggingface.co/spaces/xxsxx/fuclaude/tree/main](https://huggingface.co/spaces/xxsxx/fuclaude/tree/main "https://huggingface.co/spaces/xxsxx/fuclaude/tree/main")
 <img src="https://raw.githubusercontent.com/1198722360/picture/main/20241002163837.png"/>
 <img src="https://raw.githubusercontent.com/1198722360/picture/main/20241002164504.png"/>
@@ -31,3 +32,19 @@
 <img src="https://raw.githubusercontent.com/1198722360/picture/main/20241002173243.png"/>
 
 ##### 12.重新部署本项目，执行./deploy.sh。
+
+## 如何添加claude账号？
+##### 1.回到你刚刚在huggingface复制的space，点击files，点击Dockerfile
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241002175500.png"/>
+
+##### 2.临时将这里的false改为true，然后重启space
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241002175645.png"/>
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241002180823.png"/>
+
+##### 3.访问你的claude域名，会进入如下页面：
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241002180027.png"/>
+
+##### 4.用claude账号登录，或者输入一个没注册过的邮箱，能直接注册，但是需要国外手机接码。登录之后，访问 你的claude域名/api/auth/session，即可看到session。取到session之后，到后台加号即可。
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241002180654.png"/>
+
+##### 5.加完号之后，一定要把第2步的配置改回false然后重启space。否则其他人能看到。session理论上是永久的。
