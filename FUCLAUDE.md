@@ -28,7 +28,7 @@
 ##### 10.来到左侧的Workers路由，添加一个路由，Worker选择刚才创建的那个。如下图所示：
 <img src="https://raw.githubusercontent.com/1198722360/picture/main/20241002171855.png"/>
 
-##### 11.修改本项目中的application.yml，将fuclaude配置中的url改成你刚刚配的dns解析，password改成你worker里设置的代码。
+##### 11.修改本项目中的application.yml，将fuclaude配置中的url改成你刚刚配的dns解析，password改成你worker里设置的password。
 <img src="https://raw.githubusercontent.com/1198722360/picture/main/20241002173243.png"/>
 
 ##### 12.重新部署本项目，执行./deploy.sh。

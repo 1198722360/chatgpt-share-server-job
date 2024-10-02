@@ -1,9 +1,12 @@
 # chatgpt-share-server-job
 #### 未改主体的可高度自定义的xyhelper旗下的chatgpt-share-server二开。集注册、登录、在线下单、分离plus会员/普通会员、集成claude并获取剩余次数、邀请返利机制、二级分销系统、优惠券发放、激活码发放、公告管理、虚拟车队、审计限流等实用功能于一体。
 
-#### 预览
+## 首先向xyhelper致敬🫡🫡
+
+#### 快速预览
 前端地址：[demo.075114.xyz](https://demo.075114.xyz "demo.075114.xyz")
 后台地址：[demo.075114.xyz/myadmin](https://demo.075114.xyz/myadmin "demo.075114.xyz/myadmin")
+
 
 ## 功能说明
 1.注册登录：可选阿里云短信发验证码，或邮箱发验证码。后台可以配置新用户赠送优惠券、plus激活码、普通激活码。 已实现邮箱白名单，有效避免用户白嫖。
@@ -87,10 +90,15 @@ cd chatgpt-share-server-job
 ./deploy.sh
 ```
 ### Claude配置
-感谢始皇的小玩具fuclaude👍👍👍
+Claude基于始皇的fuclaude，感谢始皇的小玩具🫡🫡
 
-言归正传，首先需要准备一个额外域名，必须托管到cloudflare，否则无法实现计次。采用huggingface进行部署(免费，免服务器)
+言归正传，需要准备一个额外域名，必须托管到cloudflare，否则无法实现计次。采用huggingface进行部署(免费，免服务器)。详细教程请查看：[https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md](https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md "https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md")
 
 - ### 支持试用。试用、帮忙部署请联系
 <img height="200px" src="https://raw.githubusercontent.com/1198722360/picture/main/20241002161540.png"/>
 - ### 正式版授权费用：50r/月，在线下单：[https://075114.xyz](https://075114.xyz "https://075114.xyz")  一次付费享全部功能，不按功能额外收费。永久包更新！
+
+### 其它说明
+- chatgpt加号仍使用原xy后台进行添加。
+
+- xy后台账号密码与本外挂二开后台相同
