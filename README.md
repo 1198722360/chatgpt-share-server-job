@@ -34,14 +34,63 @@
 
 14.<span style="color:red;">超强限流器</span>：可分别对普通会员、plus会员的任意模型进行分组次数限制。
 
-#### 部署教程
-&emsp;&emsp;首先确保部署了原版chatgpt-share-server(直达连接：[https://chatgpt-share-server.xyhelper.cn/install](https://chatgpt-share-server.xyhelper.cn/install "https://chatgpt-share-server.xyhelper.cn/install"))，或者没有改动过原share数据库表的二开。<span style="color:red;">需要将原share的docker-compose.yml中的AUDIT_LIMIT_URL改成
-```yaml
-http://chatgpt-job:6777/audit_limit
+## 部署教程
+- chatgpt-share-server部署教程请参考[https://chatgpt-share-server.xyhelper.cn/install](https://chatgpt-share-server.xyhelper.cn/install "https://chatgpt-share-server.xyhelper.cn/install")
+- 本项目部署请参考下面两种方式
+####方式① 一键部署(未部署过share的可用)
+```shell
+#执行以下命令，一键部署share+本项目
+curl -sSfL https://raw.githubusercontent.com/1198722360/chatgpt-share-server-job/refs/heads/main/quick-install.sh | bash
 ```
-</span>
-<div style="text-align:center">
-<img  src="https://raw.githubusercontent.com/1198722360/picture/main/1727844465259.jpg"/ height="300px">
-</div>
+反向代理配置(以caddy为例)：
+```shell
+你的域名.com www.你的域名.com {
+    # 外挂用户端
+    reverse_proxy /list 127.0.0.1:6777
+    reverse_proxy /mall 127.0.0.1:6777
+    reverse_proxy /me 127.0.0.1:6777
+    
+    # 外挂后端接口
+    reverse_proxy /job/* 127.0.0.1:6777
+    
+    # 外挂后台
+    reverse_proxy /myadmin* 127.0.0.1:6777
+    
+    # 代理商后台
+    reverse_proxy /partner 127.0.0.1:6·777
 
-&emsp;&emsp;然后
+    # 其它请求均转发给原share端口
+    reverse_proxy 127.0.0.1:8300
+}
+```
+
+####方式② 手动部署
+&emsp;&emsp;首先确保使用原版chatgpt-share或没有改动过share原有的表结构！！并做好备份！！！！！！！！
+```shell
+cd ~
+cd chatgpt-share
+docker compose down
+
+# 替换原审计限流
+sed -i 's|http://auditlimit:8080/audit_limit|http://chatgpt-job:6777/audit_limit|g' docker-compose.yml
+
+# 下载额外的数据表
+wget -P docker-entrypoint-initdb.d/  https://raw.githubusercontent.com/1198722360/chatgpt-share-server-job/refs/heads/main/job.sql
+
+# 部署share
+./deploy.sh
+
+# 部署本外挂项目
+cd ~
+git clone https://github.com/1198722360/chatgpt-share-server-job.git
+cd chatgpt-share-server-job
+./deploy.sh
+```
+### Claude配置
+感谢始皇的小玩具fuclaude👍👍👍
+
+言归正传，首先需要准备一个额外域名，必须托管到cloudflare，否则无法实现计次。采用huggingface进行部署(免费，免服务器)
+
+- ### 支持试用。试用、帮忙部署请联系
+<img height="200px" src="https://raw.githubusercontent.com/1198722360/picture/main/20241002161540.png"/>
+- ### 正式版授权费用：50r/月，在线下单：[https://075114.xyz](https://075114.xyz "https://075114.xyz")  一次付费享全部功能，不按功能额外收费。永久包更新！
