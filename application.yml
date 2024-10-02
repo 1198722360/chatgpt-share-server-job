@@ -50,9 +50,9 @@ chatgpt-share:
   
 fuclaude:
   # fuclaude获取登录链接的地址
-  url: https://claude.pw
+  url: https://www.claude.pw
   auth-url: /manage-api/auth/oauth_token
-
+  password: aaaaa
 
 ip-auth:
   auth-url: https://075114.xyz
