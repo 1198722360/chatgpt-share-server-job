@@ -83,7 +83,7 @@ wget -P docker-entrypoint-initdb.d/  https://raw.githubusercontent.com/119872236
 # 部署share
 ./deploy.sh
 
-# 部署本外挂项目
+# 部署本外挂项目(记得修改application.yml中的mysql密码)
 cd ~
 git clone https://github.com/1198722360/chatgpt-share-server-job.git
 cd chatgpt-share-server-job
@@ -94,8 +94,9 @@ Claude基于始皇的fuclaude，感谢始皇的小玩具🫡🫡
 
 言归正传，需要准备一个额外域名，必须托管到cloudflare，否则无法实现计次。采用huggingface进行部署(免费，免服务器)。详细教程请查看：[https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md](https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md "https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md")
 
-- ### 支持试用！试用、帮忙部署请联系我
+- ### 支持试用！试用、帮忙部署、咨询请联系我
 <img height="200px" src="https://raw.githubusercontent.com/1198722360/picture/main/20241002161540.png"/>
+
 - ### 正式版授权费用：50r/月/ip，在线下单：[https://075114.xyz](https://075114.xyz "https://075114.xyz")  一次付费享全部功能，不按功能额外收费。永久包更新！
 
 ### 其它说明
