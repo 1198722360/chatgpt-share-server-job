@@ -4,9 +4,15 @@
 ## 首先向xyhelper致敬🫡🫡
 
 #### 快速预览
-前端地址：[demo.075114.xyz](https://demo.075114.xyz "demo.075114.xyz")
-后台地址：[demo.075114.xyz/myadmin](https://demo.075114.xyz/myadmin "demo.075114.xyz/myadmin")
+前端地址：[demo.075114.xyz](https://demo.075114.xyz "demo.075114.xyz")   测试账号：123456  密码：123456
 
+后台地址：[demo.075114.xyz/myadmin](https://demo.075114.xyz/myadmin "demo.075114.xyz/myadmin")  账号：123456 密码：123456
+
+测试分站：[demo.075115.xyz](https://demo.075115.xyz "demo.075115.xyz")  
+
+测试分站后台：[demo.075115.xyz/partner](https://demo.075115.xyz/partner "demo.075115.xyz/partner")   账号：1partner 密码：1partner
+
+[注]为避免测试站密码被改，原版xy后台已隐藏，并禁止对本项目后台作修改，修改报错为正常现象。
 
 ## 功能说明
 1.注册登录：可选阿里云短信发验证码，或邮箱发验证码。后台可以配置新用户赠送优惠券、plus激活码、普通激活码。 已实现邮箱白名单，有效避免用户白嫖。
@@ -89,6 +95,30 @@ git clone https://github.com/1198722360/chatgpt-share-server-job.git
 cd chatgpt-share-server-job
 ./deploy.sh
 ```
+
+&emsp;&emsp;会员时长迁移。进入mysql容器，输入mysql -uroot -p，然后填入你在share的docker-compose.yml中设置的mysql密码
+
+&emsp;&emsp;执行下列脚本，把用户原有的时长转换为激活码，用户注册后到个人中心把原来的UserToken导入进去即可。
+
+```shell
+INSERT INTO user_token_not_used (userToken, duration, isPlus, is_used, is_create_by_admin, account_id, create_time, access)
+SELECT 
+    cu.userToken, 
+    CEIL(TIMESTAMPDIFF(HOUR, NOW(), cu.expireTime)) AS duration, 
+    cu.isPlus, 
+    0 AS is_used, 
+    0 AS is_create_by_admin, 
+    NULL AS account_id, 
+    NOW() AS create_time, 
+    '购买获得' AS access
+FROM 
+    chatgpt_user cu
+WHERE 
+    cu.expireTime > NOW();
+
+```
+&emsp;&emsp;反向代理配置见上文。
+
 ### Claude配置
 Claude基于始皇的fuclaude，感谢始皇的小玩具🫡🫡
 
