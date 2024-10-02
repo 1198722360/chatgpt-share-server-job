@@ -5,8 +5,8 @@ server:
       timeout: 168h  # 设置 session 过期时间为7天
 spring:
   datasource:
-    username: 
-    password: 
+    username: root
+    password: 123456
     url: jdbc:mysql://mysql:3306/cool
     driver-class-name: com.mysql.cj.jdbc.Driver
   devtools:
