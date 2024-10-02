@@ -37,7 +37,7 @@
 ## 部署教程
 - chatgpt-share-server部署教程请参考[https://chatgpt-share-server.xyhelper.cn/install](https://chatgpt-share-server.xyhelper.cn/install "https://chatgpt-share-server.xyhelper.cn/install")
 - 本项目部署请参考下面两种方式
-####方式① 一键部署(未部署过share的可用)
+#### 方式① 一键部署(未部署过share的可用)
 ```shell
 #执行以下命令，一键部署share+本项目
 curl -sSfL https://raw.githubusercontent.com/1198722360/chatgpt-share-server-job/refs/heads/main/quick-install.sh | bash
@@ -64,7 +64,7 @@ curl -sSfL https://raw.githubusercontent.com/1198722360/chatgpt-share-server-job
 }
 ```
 
-####方式② 手动部署
+#### 方式② 手动部署
 &emsp;&emsp;首先确保使用原版chatgpt-share或没有改动过share原有的表结构！！并做好备份！！！！！！！！
 ```shell
 cd ~
