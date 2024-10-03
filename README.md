@@ -121,7 +121,7 @@ WHERE
 &emsp;&emsp;反向代理配置见上文。
 
 ### Claude配置
-Claude基于始皇的fuclaude，感谢始皇的小玩具:kissing_heart::kissing_heart::kissing_heart:
+Claude基于始皇的fuclaude，感谢始皇的小玩具
 
 言归正传，需要准备一个额外域名，必须托管到cloudflare，否则无法实现计次。采用huggingface进行部署(免费，免服务器)。详细教程请查看：[https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md](https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md "https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md")
 
