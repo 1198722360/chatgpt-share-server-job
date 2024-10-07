@@ -4,11 +4,11 @@ spring:
   datasource:
     druid:
       username: root
-      password: xxx
+      password: dsa
       url: jdbc:mysql://mysql:3306/cool
       driver-class-name: com.mysql.cj.jdbc.Driver
       initial-size: 10                # 初始连接数，适当增加以缩短初始响应时间
-      max-active: 200                 # 最大连接数，增大以支持更高并发访问
+      max-active: 200                  # 最大连接数，增大以支持更高并发访问
       min-idle: 10                    # 最小空闲连接数，保持一定数量的空闲连接以提高响应速度
       max-wait: 30000                 # 获取连接等待超时时间，设置为 30 秒，防止等待时间过长
       time-between-eviction-runs-millis: 30000  # 检测空闲连接的间隔时间，减少不必要的资源浪费
@@ -20,17 +20,17 @@ spring:
       pool-prepared-statements: true # 是否打开 PSCache
       max-pool-prepared-statement-per-connection-size: 100  # 增大 PSCache 大小，提升性能
       stat-view-servlet:
-        enabled: true                # 数据库监控端，不开请改false，开请设置下面的登录密码
+        enabled: true                # 可忽略(改false)
         url-pattern: /druid/*
         allow: ""
         deny: ""
-        login-username: 123456       # Web监控页面登录用户名，自己改
-        login-password: 123456       # Web监控页面登录密码，自己改
+        login-username: 123456        # Web监控页面登录用户名
+        login-password: 123456     # Web监控页面登录密码
         reset-enable: false
       filter:
         stat:
           log-slow-sql: true
-          slow-sql-millis: 2000
+          slow-sql-millis: 2000      # 慢SQL的标准（毫秒）
         wall:
           config:
             multi-statement-allow: true
@@ -58,6 +58,7 @@ aliyun:
     charset: UTF-8
     format: json
     signType: RSA2
+    
 #   ip请求限制
 rate-limiter:
 #   通常情况下
@@ -71,7 +72,7 @@ fuclaude:
   # fuclaude获取登录链接的地址
   url: https://claude.pw
   auth-url: /manage-api/auth/oauth_token
-  password: xxx
+  password: 123456
 
 ip-auth:
-  license: #授权码
+  license: 111 #授权码
