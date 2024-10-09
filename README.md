@@ -40,7 +40,7 @@
 
 12.反监管功能：开启后不登录只显示账号列表，隐藏在线商城。上次被阿里云抽查到了，封了域名，要求我整改或备案。我跟客服扯了一晚上保证这保证那才给我解开。后来不知道是不是开启隐藏商店的原因，再也没找过我。🫥如果给查到，可以开启这个功能半个月，等检查的走了，再关闭。
 
-13.<span style="color:red;">超强限流器</span>：可分别对普通会员、plus会员的任意模型进行分组次数限制。
+13.<span style="color:red;">加强版限流器</span>：可分别对普通会员、plus会员的任意模型进行分组次数限制。
 <img src="https://raw.githubusercontent.com/1198722360/picture/main/20241003035842.png"/>
 
 
@@ -125,10 +125,10 @@ Claude基于始皇的fuclaude，感谢始皇的小玩具
 
 言归正传，需要准备一个额外域名，必须托管到cloudflare，否则无法实现计次。采用huggingface进行部署(免费，免服务器)。详细教程请查看：[https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md](https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md "https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md")
 
-- ### 支持试用！试用、帮忙部署、咨询请联系作者vx: diagpt 
+- ### 支持试用！试用、帮忙部署(50r/次)、咨询请联系作者vx: diagpt 
 <img height="200px" src="https://raw.githubusercontent.com/1198722360/picture/main/20241002161540.png"/>
 
-- ### 正式版授权费用：50r/月/ip，在线试用(7天)、下单：[https://075114.xyz](https://075114.xyz "https://075114.xyz")  一次付费享全部功能，不按功能额外收费。永久包更新！
+- ### 正式版授权费用：50r/月/ip。下单：[https://075114.xyz](https://075114.xyz "https://075114.xyz")  一次付费享全部功能，不按功能额外收费。永久包更新！
 
 ### 其它说明
 - chatgpt加号仍使用原xy后台进行添加。
