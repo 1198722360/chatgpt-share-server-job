@@ -1,3 +1,4 @@
+1121
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -5,7 +6,7 @@ DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account`  (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `phone` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '邮箱',
-  `password` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '密码',
+  `password` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '密码',
   `invite_code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '自己的邀请码',
   `inviter_id` bigint NULL DEFAULT NULL COMMENT 'phone表中谁邀请的',
   `chatgpt_user_id` bigint NULL DEFAULT NULL COMMENT '绑定的UserToken',
@@ -215,7 +216,7 @@ DROP TABLE IF EXISTS `partner`;
 CREATE TABLE `partner`  (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` longtext CHARACTER CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `domain` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `config` json NULL COMMENT '配置',
   `total_earned` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '总收入',
