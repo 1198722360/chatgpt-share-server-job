@@ -215,7 +215,7 @@ DROP TABLE IF EXISTS `partner`;
 CREATE TABLE `partner`  (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` longtext CHARACTER CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `domain` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `config` json NULL COMMENT '配置',
   `total_earned` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '总收入',
