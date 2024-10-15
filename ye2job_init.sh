@@ -55,7 +55,7 @@ select_docker_container() {
     done
 
     while true; do
-        read -p "请选择${container_role}的 MySQL 容器序号: " container_number
+        read -p "请选择${container_role} MySQL 容器序号: " container_number
         if ! [[ "$container_number" =~ ^[0-9]+$ ]]; then
             echo "无效的序号：请输入数字。"
             continue
