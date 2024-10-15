@@ -282,4 +282,25 @@ CREATE TABLE `user_token_not_used`  (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
+
+
+INSERT INTO user_token_not_used (userToken, duration, isPlus, is_used, is_create_by_admin, account_id, create_time, access)
+SELECT 
+    cu.userToken, 
+    CEIL(TIMESTAMPDIFF(HOUR, NOW(), cu.expireTime)) AS duration, 
+    cu.isPlus, 
+    0 AS is_used, 
+    0 AS is_create_by_admin, 
+    NULL AS account_id, 
+    NOW() AS create_time, 
+    '购买获得' AS access
+FROM 
+    chatgpt_user cu
+WHERE 
+    cu.expireTime > NOW();
+
+
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+
