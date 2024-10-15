@@ -103,7 +103,7 @@ deploy_chatgpt_share_server() {
     fi
 
     # 执行SQL脚本
-    echo "正在添加二开项目所需的额外数据表..."
+    echo "正在添加二开项目所需的额外数据表，并将userToken剩余时长转换为未使用激活码，之后需要用户注册后到个人中心导入以前的userToken作为激活码..."
     docker exec -i $selected_container mysql -u$mysql_user -p$mysql_password $database_name -e "source /tmp/job.sql;" 2>mysql_error.log
 
     # 捕获 MySQL 命令的退出状态码
