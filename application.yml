@@ -4,7 +4,7 @@ spring:
   datasource:
     druid:
       username: root
-      password: dsa
+      password: 123456
       url: jdbc:mysql://mysql:3306/cool
       driver-class-name: com.mysql.cj.jdbc.Driver
       initial-size: 10                # 初始连接数，适当增加以缩短初始响应时间
@@ -20,7 +20,7 @@ spring:
       pool-prepared-statements: true # 是否打开 PSCache
       max-pool-prepared-statement-per-connection-size: 100  # 增大 PSCache 大小，提升性能
       stat-view-servlet:
-        enabled: true                # 可忽略(改false)
+        enabled: false                # 可忽略(改false)
         url-pattern: /druid/*
         allow: ""
         deny: ""
