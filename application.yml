@@ -3,6 +3,10 @@ server:
 spring:
   datasource:
     druid:
+      ########################
+      # 第1处配置            #
+      # share mysql 账号密码 #
+      ########################
       username: root
       password: 123456
       url: jdbc:mysql://mysql:3306/cool
@@ -72,7 +76,16 @@ fuclaude:
   # fuclaude获取登录链接的地址
   url: https://claude.pw
   auth-url: /manage-api/auth/oauth_token
+  ##############################
+  # 第2处配置                  #
+  # fuclaude更新状态接口的密码 #
+  # 自定义，要和worker里面匹配 #
+  ##############################
   password: 123456
 
 ip-auth:
-  license: 111 #授权码
+  ##############
+  # 第三处配置 #
+  # 二开授权码 #
+  ##############
+  license: 111 
