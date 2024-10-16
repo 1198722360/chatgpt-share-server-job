@@ -20,7 +20,7 @@ LOG_FILE="$project_dir/migration.log"
 # mkdir -p "$project_dir"
 
 # 重定向所有输出和错误到日志文件，同时显示在终端
-exec > >(tee -i "$LOG_FILE") 2>&1
+# exec > >(tee -i "$LOG_FILE") 2>&1
 
 echo "========== 数据迁移脚本开始 =========="
 
