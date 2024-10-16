@@ -17,7 +17,7 @@ project_dir="$HOME/chatgpt-share-server-job"
 LOG_FILE="$project_dir/migration.log"
 
 # 创建项目目录（如果不存在）
-mkdir -p "$project_dir"
+# mkdir -p "$project_dir"
 
 # 重定向所有输出和错误到日志文件，同时显示在终端
 exec > >(tee -i "$LOG_FILE") 2>&1
