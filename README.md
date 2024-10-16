@@ -47,88 +47,198 @@
 ## 部署教程
 - chatgpt-share-server部署教程请参考[https://chatgpt-share-server.xyhelper.cn/install](https://chatgpt-share-server.xyhelper.cn/install "https://chatgpt-share-server.xyhelper.cn/install")
 - 本项目部署请参考下面两种方式
-#### 方式① 一键部署(未部署过share的可用)
+
+## ①正在使用share原版
+
+##### 首先确保原版share在跑着
+
+##### 然后执行下面的脚本一键备份+数据迁移+二开部署
+
+##### (本脚本会把userToken转换为激活码，用户注册登陆后，前往个人中心将激活码导入、激活即可恢复原有的时长)
+
+<span style="color:red">【注意】本项目跑起来且运营之后，禁止再次使用这个脚本！拉更新需要到chatgpt-share-server-job文件夹执行./deploy.sh</span>
+
 ```shell
-#执行以下命令，一键部署share+本项目
-curl -sSfL https://raw.githubusercontent.com/1198722360/chatgpt-share-server-job/refs/heads/main/quick-install.sh | bash
+bash <(curl -sSfL https://raw.githubusercontent.com/1198722360/chatgpt-share-server-job/refs/heads/main/share2job_init.sh)
 ```
-反向代理配置(以caddy为例)：
+
+
+###### 第一次运行share2job_init.sh，选1，先备份一下原share数据库，运行情况如下
+```shell
+root@756k52g63vi9d59:~# bash <(curl -sSfL https://raw.githubusercontent.com/1198722360/chatgpt-share-server-job/refs/heads/main/share2job_init.sh)
+项目已存在，跳过克隆步骤。
+请选择操作：
+1. 备份 share 的 MySQL
+2. 还原 share 的 MySQL
+3. 部署 chatgpt-share-server-job
+请输入选项 (1/2/3): 1
+正在读取你的docker 容器：
+1. chatgpt-share-server-job-chatgpt-job-1
+2. chatgpt-share-chatgpt-share-server-1
+3. chatgpt-share-watchtower-1
+4. chatgpt-share-mysql-1
+5. chatgpt-share-redis-1
+6. chatgpt-share-auditlimit-1
+请选择share的MySQL容器序号: 4
+已选择容器: chatgpt-share-mysql-1
+您确认要备份 share 数据库吗？(y/n): y
+请输入share MySQL用户名 (默认: root): 
+请输入share MySQL密码 (默认: 123456): 
+请输入数据库名称 (默认: cool): 
+正在导出share数据库备份：/root/chatgpt-share-server-job/cool_backup.sql
+mysqldump: [Warning] Using a password on the command line interface can be insecure.
+数据库已成功备份到 /root/chatgpt-share-server-job/cool_backup.sql
+```
+###### 再次运行share2job_init.sh，选3，部署chatgpt-share-server-job并完成数据迁移，运行情况如下：
+```shell
+root@756k52g63vi9d59:~# bash <(curl -sSfL https://raw.githubusercontent.com/1198722360/chatgpt-share-server-job/refs/heads/main/share2job_init.sh)
+项目已存在，跳过克隆步骤。
+请选择操作：
+1. 备份 share 的 MySQL
+2. 还原 share 的 MySQL
+3. 部署 chatgpt-share-server-job
+请输入选项 (1/2/3): 3
+正在读取你的docker 容器：
+1. chatgpt-share-server-job-chatgpt-job-1
+2. chatgpt-share-chatgpt-share-server-1
+3. chatgpt-share-watchtower-1
+4. chatgpt-share-mysql-1
+请选择share的MySQL容器序号: 4
+已选择容器: chatgpt-share-mysql-1
+SQL脚本位置：/root/chatgpt-share-server-job/job.sql
+请输入share MySQL用户名 (默认: root): 
+请输入share MySQL密码 (默认: 123456): 
+请输入数据库名称 (默认: cool): 
+正在推送额外的数据表结构到：chatgpt-share-mysql-1
+Successfully copied 35.3kB to chatgpt-share-mysql-1:/tmp/
+正在添加二开项目所需的额外数据表，并将userToken剩余时长转换为未使用激活码，之后需要用户注册后到个人中心导入以前的userToken作为激活码...
+MySQL登录成功，数据表更新完成
+-----------------------------
+接下来将配置job二开配置......
+请设置一个fuclaude状态更新接口密码: 
+请输入授权码(https://075114.xyz有个测试用的授权码0.1元): 08tbss04-1086-4920-bd4h-02a6zmbab9kd
+配置文件已更新完毕。
+正在启动chatgpt-share-server-job...
+项目启动完成。
+客户端：http://41.77.123.122:6777/list
+管理端：http://41.77.123.122:6777/myadmin
+是否现在配置Caddy?(y/n): y
+请输入一级域名(不带www): chatshare.xyz
+正在更新 /etc/caddy/Caddyfile...
+反向代理配置已添加到 /etc/caddy/Caddyfile 末尾，请手动修改 /etc/caddy/Caddyfile 中的旧配置。
+客户端：https://chatshare.xyz/list
+管理端：https://chatshare.xyz/myadmin
+```
+
+##### 2.部署claude。Claude基于始皇的fuclaude，感谢始皇的小玩具，需要准备一个额外域名，必须托管到cloudflare。详见：https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md
+
+## ②正在使用夜的二开
+##### 首先确保原版share和夜的都在跑着
+
+##### 然后执行下面的脚本数据迁移+二开部署(不影响夜数据库，放心运行)
+
+<span style="color:red">【注意】本项目跑起来且运营之后，禁止再次使用这个脚本！拉更新需要到chatgpt-share-server-job文件夹执行./deploy.sh</span>
+
+```shell
+bash <(curl -sSfL https://raw.githubusercontent.com/1198722360/chatgpt-share-server-job/refs/heads/main/ye2job_init.sh)
+```
+
+##其它配置
+##### 1.替换share的审计限流：
+###### 把share的docker-compose.yml里面的
+###### http://auditlimit:8080/audit_limit
+###### 替换成
+###### http://chatgpt-job:6777/audit_limit
+
+<br>
+##### 2.开启本地保存对话记录以及无感换车
+###### 在share的docker-compose.yml的chatgpt-share-server的environment下面添加以下两行:
+```shell
+RECORD_CONVERSATION: "true"
+ALLOW_CHANGE_CAR_ON_429: "true"
+```
+
+<br>
+
+##### 3.执行./deploy.sh，重启一下share
+
+<br>
+
+##### 4.反向代理配置：
+
+- #### caddy：
 ```shell
 你的域名.com www.你的域名.com {
     # 外挂用户端
     reverse_proxy /list 127.0.0.1:6777
     reverse_proxy /mall 127.0.0.1:6777
     reverse_proxy /me 127.0.0.1:6777
-    
     # 外挂后端接口
     reverse_proxy /job/* 127.0.0.1:6777
-    
     # 外挂后台
     reverse_proxy /myadmin* 127.0.0.1:6777
-    
     # 代理商后台
-    reverse_proxy /partner 127.0.0.1:6·777
-
+    reverse_proxy /partner 127.0.0.1:6777
     # 其它请求均转发给原share端口
     reverse_proxy 127.0.0.1:8300
 }
 ```
+<br>
 
-#### 方式② 手动部署
-&emsp;&emsp;首先确保使用原版chatgpt-share或没有改动过share原有的表结构！！并做好备份！！！！！！！！
+- #### 1panel openresty：
+
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241016152934.png"/>
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241016153013.png"/>
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241016153505.png"/>
+
+<br>
+
+<span style="color:red">[注意]</span>配置前端请求路径/list的时候，匹配规则要改成=，否则会把share的换车、语音的js弄没掉，如图：
+
+<img width=300px src="https://raw.githubusercontent.com/1198722360/picture/main/20241016153635.png"/>
+<br>
+
+/mall、/me等其它路径的匹配规则不需要改(默认为^~)，其它的如https等配置请自行处理
+
+<br>
+- #### 宝塔 nginx配置：
 ```shell
-cd ~
-cd chatgpt-share
-docker compose down
-
-# 替换原审计限流
-sed -i 's|http://auditlimit:8080/audit_limit|http://chatgpt-job:6777/audit_limit|g' docker-compose.yml
-
-# 下载额外的数据表
-wget -P docker-entrypoint-initdb.d/  https://raw.githubusercontent.com/1198722360/chatgpt-share-server-job/refs/heads/main/job.sql
-
-# 部署share
-./deploy.sh
-
-# 部署本外挂项目(记得修改application.yml中的mysql密码)
-cd ~
-git clone https://github.com/1198722360/chatgpt-share-server-job.git
-cd chatgpt-share-server-job
-./deploy.sh
+proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    location = /list {
+        proxy_pass http://127.0.0.1:6777; # 外挂用户端
+    }
+    location /mall {
+        proxy_pass http://127.0.0.1:6777; # 在线商城
+    }
+    location /me {
+        proxy_pass http://127.0.0.1:6777; # 个人中心
+    }
+    location /job/ {
+        proxy_pass http://127.0.0.1:6777; # 外挂后端接口
+    }
+    location /myadmin {
+        proxy_pass http://127.0.0.1:6777; # 外挂后台
+    }
+    location /partner {
+        proxy_pass http://127.0.0.1:6777; # 代理商后台
+    }
+    # 其它请求均转发给原share端口
+    location / {
+        proxy_pass http://127.0.0.1:8300;
+    }
 ```
-
-&emsp;&emsp;会员时长迁移。进入mysql容器，输入mysql -uroot -p，然后填入你在share的docker-compose.yml中设置的mysql密码
-
-&emsp;&emsp;执行下列脚本，把用户原有的时长转换为激活码，用户注册后到个人中心把原来的UserToken导入进去即可。
-
-```shell
-INSERT INTO user_token_not_used (userToken, duration, isPlus, is_used, is_create_by_admin, account_id, create_time, access)
-SELECT 
-    cu.userToken, 
-    CEIL(TIMESTAMPDIFF(HOUR, NOW(), cu.expireTime)) AS duration, 
-    cu.isPlus, 
-    0 AS is_used, 
-    0 AS is_create_by_admin, 
-    NULL AS account_id, 
-    NOW() AS create_time, 
-    '购买获得' AS access
-FROM 
-    chatgpt_user cu
-WHERE 
-    cu.expireTime > NOW();
-
-```
-&emsp;&emsp;反向代理配置见上文。
 
 ### Claude配置
 Claude基于始皇的fuclaude，感谢始皇的小玩具
 
 言归正传，需要准备一个额外域名，必须托管到cloudflare，否则无法实现计次。采用huggingface进行部署(免费，免服务器)。详细教程请查看：[https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md](https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md "https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md")
 
-- ### 支持试用！试用、帮忙部署(50r/次)、咨询请联系作者vx: diagpt 
+- ### 可免费试用3天，免费帮部署、免费提供咨询服务！请联系作者vx: diagpt 
 <img height="200px" src="https://raw.githubusercontent.com/1198722360/picture/main/20241002161540.png"/>
 
-- ### 正式版授权费用：50r/月/授权码。在线下单：[https://075114.xyz](https://075114.xyz "https://075114.xyz")  一次付费享全部功能，不按功能额外收费。永久包更新！
+- ### 正式版授权费用：50r/月/授权码，一个授权码只能一个服务使用。在线下单：[https://075114.xyz](https://075114.xyz "https://075114.xyz")  一次付费享全部功能，不按功能额外收费。永久包更新！
 
 ### 其它说明
 - chatgpt加号仍使用原xy后台进行添加。

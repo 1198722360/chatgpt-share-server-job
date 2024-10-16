@@ -1,9 +1,9 @@
 // 设置一个密码，防止别人调用你的更新次数的接口，在服务器上的application.yml中要与之保持一致
 const password="xxxxxx" 
 
-const shareUrl="https://demo.075114.xyz" // 访问你的share的网址
+const shareUrl="https://demo.075114.xyz" // 任意一个访问你的share的网址
 
-//部署在huggingface上的fuclaude的访问地址
+
 const hfUrl="xxsxx-fuclaude.hf.space" 
 
 export default {
