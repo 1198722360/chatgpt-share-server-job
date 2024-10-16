@@ -201,7 +201,9 @@ ALLOW_CHANGE_CAR_ON_429: "true"
 /mall、/me等其它路径的匹配规则不需要改(默认为^~)，其它的如https等配置请自行处理
 
 <br>
+
 - #### 宝塔 nginx配置：
+
 ```shell
 proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
