@@ -144,7 +144,7 @@ MySQL登录成功，数据表更新完成
 bash <(curl -sSfL https://raw.githubusercontent.com/1198722360/chatgpt-share-server-job/refs/heads/main/ye2job_init.sh)
 ```
 
-##其它配置
+## 其它配置
 
 ##### 1.替换share的审计限流：
 
