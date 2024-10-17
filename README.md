@@ -133,6 +133,7 @@ MySQL登录成功，数据表更新完成
 ##### 2.部署claude。Claude基于始皇的fuclaude，感谢始皇的小玩具，需要准备一个额外域名，必须托管到cloudflare。详见：https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md
 
 ## ②正在使用夜的二开
+
 ##### 首先确保原版share和夜的都在跑着
 
 ##### 然后执行下面的脚本数据迁移+二开部署(不影响夜数据库，放心运行)
@@ -144,15 +145,27 @@ bash <(curl -sSfL https://raw.githubusercontent.com/1198722360/chatgpt-share-ser
 ```
 
 ##其它配置
+
 ##### 1.替换share的审计限流：
+
 ###### 把share的docker-compose.yml里面的
-###### http://auditlimit:8080/audit_limit
+
+```shell
+http://auditlimit:8080/audit_limit
+```
+
 ###### 替换成
-###### http://chatgpt-job:6777/audit_limit
+
+```shell
+http://chatgpt-job:6777/audit_limit
+```
 
 <br>
+
 ##### 2.开启本地保存对话记录以及无感换车
+
 ###### 在share的docker-compose.yml的chatgpt-share-server的environment下面添加以下两行:
+
 ```shell
 RECORD_CONVERSATION: "true"
 ALLOW_CHANGE_CAR_ON_429: "true"
@@ -167,6 +180,7 @@ ALLOW_CHANGE_CAR_ON_429: "true"
 ##### 4.反向代理配置：
 
 - #### caddy：
+
 ```shell
 你的域名.com www.你的域名.com {
     # 外挂用户端
@@ -233,6 +247,7 @@ proxy_set_header Host $host;
 ```
 
 ### Claude配置
+
 Claude基于始皇的fuclaude，感谢始皇的小玩具
 
 言归正传，需要准备一个额外域名，必须托管到cloudflare，否则无法实现计次。采用huggingface进行部署(免费，免服务器)。详细教程请查看：[https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md](https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md "https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md")
