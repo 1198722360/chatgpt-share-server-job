@@ -90,11 +90,16 @@
 
 ### 优惠券：可以设置折扣、门槛、过期时间。可以配置注册时赠送优惠券，可以手动向用户发放优惠券、或批量发放优惠券。
 
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241029171248.png"/>
+
 <img src="https://raw.githubusercontent.com/1198722360/picture/main/20241029161424.png"/>
 
 <br>
 
 ### 激活码发放：可以指定时长、是否plus、获得方式，向单个用户或指定人群(plus会员、普通会员、非会员、全部人)发放激活码。
+
+
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241029171044.png"/>
 
 <br>
 
