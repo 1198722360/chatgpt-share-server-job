@@ -1,7 +1,18 @@
 # chatgpt-share-server-job
-#### 未改主体的可高度自定义的xyhelper旗下的chatgpt-share-server二开。集注册、登录、在线下单、分离plus会员/普通会员、集成claude并获取剩余次数、邀请返利机制、二级分销系统、优惠券发放、激活码发放、公告管理、虚拟车队、审计限流等实用功能于一体。
+- #### 这是一个未改主体的可高度自定义的xyhelper旗下的chatgpt-share-server二开。集注册、登录、在线下单、分离plus会员/普通会员、集成claude并获取剩余次数、邀请返利机制、二级分销系统、优惠券发放、激活码发放、公告管理、虚拟车队、审计限流等实用功能于一体。
 
-## 首先向xyhelper致敬 :kissing_heart::kissing_heart::kissing_heart:
+- #### 本项目基于chatgpt-share-server原版，必须使用xy接入点。因未改动主体，原版share的全部功能都可用，包括限制多设备登录、无感换车、本地保留对话记录等等。
+
+<br>
+
+- #### 联系我
+
+<img height="200px" src="https://raw.githubusercontent.com/1198722360/picture/main/20241002161540.png"/><img height="300px" src="https://raw.githubusercontent.com/1198722360/picture/main/892dfb0da7b6c1d3bc6852f7ef87d32.jpg"/>
+
+#### 费用
+50r/月/授权码， 一次付费享全部功能，不按功能额外收费。永久包更新！
+
+在线授权：[https://075114.xyz](https://075114.xyz "https://075114.xyz") 
 
 #### 快速预览
 前端地址：[demo.075114.xyz](https://demo.075114.xyz "demo.075114.xyz")   测试账号：123456  密码：123456
@@ -15,40 +26,102 @@
 [注]为避免测试站密码被改，原版xy后台已隐藏，并禁止对本项目后台作修改，修改报错为正常现象。
 
 ## 功能说明
-1.注册登录：可选阿里云短信发验证码，或邮箱发验证码。后台可以配置新用户赠送优惠券、plus激活码、普通激活码。 已实现邮箱白名单，有效避免用户白嫖。
 
-2.在线商城：支持支付宝当面付，生成下单二维码，用户可支付宝扫码下单。并可使用优惠券。
+- ### 炫酷主题。可切换亮/暗模式
 
-3.个人中心：用户可以导入、使用激活码。并可以看到以前导入过的激活码，方便售后。
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241029151845.png"/>
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241029151907.png"/>
 
-4.<span style="color:red;">邀请返利</span>：后台设置邀请返利百分比，被邀请者购买后，邀请者获得一定时长的返利。
+<img width="400px" src="https://raw.githubusercontent.com/1198722360/picture/main/20241029155911.png"/><img width="400px" src="https://raw.githubusercontent.com/1198722360/picture/main/20241029160000.png"/>
 
-5.<span style="color:red;">Claude集成</span>：目前不支持单独售卖Claude，Plus会员可使用。已实现了<span style="color:red;">剩余次数记录</span>。
+<br>
 
-6.<span style="color:red;">二级分销</span>：在后台添加一个分销商账号，并设置对应的域名。在Caddy或Nginx中对这个域名配置一个和主站相同的反向代理配置。 分销商可以通过/partner进入管理页，可自定义公告、商品价格(相对于主站的倍数)等，用户进入分站时，<span style="color:red">显示的是分站的公告、价格</span>。 用户付的钱先到站长那，站长在/myadmin后台可以设置分站返额比例，并可定期向分销商结款。
+- ### Claude集成：已实现剩余次数记录(独家)。基本可以商业化了。
 
-7.**优惠券发放**：可以设置折扣、门槛、过期时间。可以配置注册赠送优惠券，可以手动向用户发放优惠券、或批量发放优惠券。
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241029152310.png"/>
 
-8.**激活码发放**：可以指定时长、是否plus、获得方式，向单个用户或指定人群(plus会员、普通会员、非会员、全部人)发放激活码。
+<br>
 
-9.**激活码生成**：指定时长、是否plus、获得方式批量生成**未使用的**激活码，一键导出，可用于发卡网。
+- ### 最强虚拟车，没有之一：可分别指定plus号的虚拟车数量、普号的虚拟车数量。以假乱真，1个号变100个号。非刷新随机虚拟车名，而是每个虚拟车固定一个名字，固定一个负载偏移量，虚拟时，选择的车也不是乱选的，后台有一定的算法，看不出任何痕迹！真正以假乱真！
 
-10.公告配置：除了弹窗公告，其它公告均支持element plus标签、html标签、或文本，高度自定义，对非编程人员不友好，可以复制演示站后台的公告，让GPT帮忙修改、或只替换关键部分。
+<br>
 
-11.<span style="color:red;">虚拟车队</span>：可分别指定plus号的虚拟车数量、普号的虚拟车数量。以假乱真，1个号变100个号。
-<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241003040523.png"/>
+- ### 可开启显示每个车的每个模型可用情况，一目了然，极大提高用户体验感，不再换来换去都是没次数的车，配合虚拟车，简直无敌！
 
-12.反监管功能：开启后不登录只显示账号列表，隐藏在线商城。上次被阿里云抽查到了，封了域名，要求我整改或备案。我跟客服扯了一晚上保证这保证那才给我解开。后来不知道是不是开启隐藏商店的原因，再也没找过我。🫥如果给查到，可以开启这个功能半个月，等检查的走了，再关闭。
+<img width="300px" src="https://raw.githubusercontent.com/1198722360/picture/main/20241029105509.png"/><img width="300px" src="https://raw.githubusercontent.com/1198722360/picture/main/20241029105545.png"/>
 
-13.<span style="color:red;">加强版限流器</span>：可分别对普通会员、plus会员的任意模型进行分组次数限制。
-<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241003035842.png"/>
+<br>
+
+- ### 注册登录：可选阿里云短信发验证码，或邮箱发验证码。后台可以配置新用户赠送优惠券、plus激活码、普通激活码。 已实现邮箱白名单，有效避免用户白嫖。
+
+<br>
+
+- ### 在线商城：支持支付宝当面付、易(码)支付支付宝/微信，并可使用优惠券。
+
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241029153206.png"/>
+
+<img width="300px" src="https://raw.githubusercontent.com/1198722360/picture/main/20241029153849.png"/>
+
+<br>
+
+- ### 购买后发激活码，让用户自主激活，而不是购买后直接计时。即使节约的这点时长微不足道，但能让用户看到我们的用心！节省的时长虽小，转化率的提升却大！另外，用户也可以导入激活码，完美对接淘宝、发卡网。
+
+<br>
+
+- ###  邀请返利：后台设置邀请返利百分比，被邀请者购买后，邀请者获得一定时长的返利。
+
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241029161319.png"/>
+
+<br>
+
+- ### 二级分销：可以在后台添加分销商账号，并设置对应的域名。在Caddy或Nginx中对这个域名配置一个和主站相同的反向代理配置。 分销商就可以通过/partner进入管理页，可自定义公告、商品价格(相对于主站的倍数)等，用户进入分站时，显示的是分站的公告、价格。 用户付的钱先到站长那，站长在/myadmin后台可以设置分站返额比例，并可定期向分销商结款。自己干比不上找人帮你干，效率直接翻n倍！
+
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241029155310.png"/>
+
+<br>
+
+- ### 优惠券：可以设置折扣、门槛、过期时间。可以配置注册时赠送优惠券，可以手动向用户发放优惠券、或批量发放优惠券。
+
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241029161424.png"/>
+
+<br>
+
+- ### 激活码发放：可以指定时长、是否plus、获得方式，向单个用户或指定人群(plus会员、普通会员、非会员、全部人)发放激活码。
+
+<br>
+
+- ### 激活码生成：指定时长、是否plus、获得方式，批量生成未使用的激活码，一键导出，可用于发卡网。
+
+<br>
+
+- ### 公告配置：支持element plus标签、html标签、或纯文本，高度自定义！可以复制演示站后台的公告，让GPT帮忙修改、或只替换关键部分。
+
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241029161538.png"/>
+
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241029161712.png"/>
+
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241029161749.png"/>
+
+<br>
+
+- ### 反监管功能：开启后不登录只显示账号列表，隐藏在线商城。上次被阿里云抽查到了，封了域名，要求我整改或备案。我跟客服扯了一晚上保证这保证那才给我解开。后来不知道是不是开启隐藏商店的原因，再也没找过我。🫥如果给查到，可以开启这个功能半个月，等检查的走了，再关闭。
+
+
+<br>
+
+- ### 加强版限流器：可分别对普通会员、plus会员的任意模型进行分组次数限制。
+
+<img src="https://raw.githubusercontent.com/1198722360/picture/main/20241029161912.png"/>
+
+<br>
+
 
 
 ## 部署教程
 - chatgpt-share-server部署教程请参考[https://chatgpt-share-server.xyhelper.cn/install](https://chatgpt-share-server.xyhelper.cn/install "https://chatgpt-share-server.xyhelper.cn/install")
 - 本项目部署请参考下面两种方式
 
-## ①正在使用share原版
+## ①正在使用share原版或全新部署
 
 ##### 首先确保原版share在跑着
 
@@ -219,30 +292,67 @@ ALLOW_CHANGE_CAR_ON_429: "true"
 - #### 宝塔 nginx配置：
 
 ```shell
-proxy_set_header Host $host;
+    proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header REMOTE-HOST $remote_addr;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;
+    proxy_http_version 1.1;
+    add_header X-Cache $upstream_cache_status;
+    proxy_ignore_headers Set-Cookie Cache-Control expires;
+    proxy_cache cache_one;
+    proxy_cache_key $host$uri$is_args$args;
+    proxy_cache_valid 200 304 301 302 1m;
     location = /list {
         proxy_pass http://127.0.0.1:6777; # 外挂用户端
+        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
+        {
+            expires 1m;
+        }
     }
     location /mall {
         proxy_pass http://127.0.0.1:6777; # 在线商城
+        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
+        {
+            expires 1m;
+        }
     }
     location /me {
         proxy_pass http://127.0.0.1:6777; # 个人中心
+        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
+        {
+            expires 1m;
+        }
     }
     location /job/ {
         proxy_pass http://127.0.0.1:6777; # 外挂后端接口
+        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
+        {
+            expires 1m;
+        }
     }
     location /myadmin {
         proxy_pass http://127.0.0.1:6777; # 外挂后台
+        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
+        {
+            expires 1m;
+        }
     }
     location /partner {
         proxy_pass http://127.0.0.1:6777; # 代理商后台
+        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
+        {
+            expires 1m;
+        }
     }
     # 其它请求均转发给原share端口
     location / {
         proxy_pass http://127.0.0.1:8300;
+        if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
+        {
+            expires 1m;
+        }
     }
 ```
 
@@ -252,10 +362,6 @@ Claude基于始皇的fuclaude，感谢始皇的小玩具
 
 言归正传，需要准备一个额外域名，必须托管到cloudflare，否则无法实现计次。采用huggingface进行部署(免费，免服务器)。详细教程请查看：[https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md](https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md "https://github.com/1198722360/chatgpt-share-server-job/blob/main/FUCLAUDE.md")
 
-- ### 可免费试用3天，免费帮部署、免费提供咨询服务！请联系作者vx: diagpt 
-<img height="200px" src="https://raw.githubusercontent.com/1198722360/picture/main/20241002161540.png"/>
-
-- ### 正式版授权费用：50r/月/授权码，一个授权码只能一个服务使用。在线下单：[https://075114.xyz](https://075114.xyz "https://075114.xyz")  一次付费享全部功能，不按功能额外收费。永久包更新！
 
 ### 其它说明
 - chatgpt加号仍使用原xy后台进行添加。
