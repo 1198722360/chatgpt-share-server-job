@@ -129,7 +129,6 @@
 
 
 ## 部署教程
-- chatgpt-share-server部署教程请参考[https://chatgpt-share-server.xyhelper.cn/install](https://chatgpt-share-server.xyhelper.cn/install "https://chatgpt-share-server.xyhelper.cn/install")
 - 本项目部署请参考下面两种方式
 
 ## ①正在使用share原版或全新部署
